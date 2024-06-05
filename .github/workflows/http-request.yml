@@ -1,0 +1,13 @@
+name: HTTP Request Handler
+on:
+  workflow_dispatch:
+jobs:
+  handle-request:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Run Docker container
+      run: |
+        echo "Request Headers: ${{ github.event.inputs.headers }}"
+        docker run --rm -e HEADERS="${{ github.event.inputs.headers }}" my-docker-image
